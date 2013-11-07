@@ -1,0 +1,15 @@
+
+@font-face {
+    font-family: 'Blanch';
+    src: url('fonts/Blanch/BLANCH_CAPS.otf') format("opentype");
+}
+
+@font-face {
+    font-family: 'Typewriter';
+    src: url('fonts/atwriter.ttf');
+}
+
+.typewriter {
+    font-family: "Typewriter";
+    font-size: 2em;
+}
