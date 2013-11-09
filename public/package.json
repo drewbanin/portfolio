@@ -1,0 +1,9 @@
+{
+  "name": "drews-website",
+  "version": "0.2.0",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-watch": "~0.5.3"
+  }
+}
