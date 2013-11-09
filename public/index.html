@@ -1,33 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="lifeApp" lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link media="screen" rel="stylesheet" type="text/css" href="bootstrap3/dist/css/bootstrap.min.css"></link>
+        <link media="screen" rel="stylesheet" type="text/css" href="bootstrap3/css/bootstrap.min.css"></link>
         <link media="screen" rel="stylesheet" type="text/css" href="css/main.css"></link>
-        <script src="js/angular.min.js"></script>
-        <script src="js/jquery-2.0.3.min.js"></script>
-        <script src="bootstrap3/dist/js/bootstrap.min.js"></script>
-        <title>Drew Banin</title>
+        <script src="lib/js/jquery-2.0.3.min.js"></script>
+        <script src="lib/js/angular.min.js"></script>
+        <script src="js/lifeApp.js"></script>
+        <script src="js/controllers/homeCtrl.js"></script>
+
+        <script src="bootstrap3/js/bootstrap.min.js"></script>
+        <title>Drew Banin | Life</title>
     </head>
-    <body style="border-top: 2px solid #333">
-        <div class="container">
-            <div class="row" style="margin-top: 25px;">
-                <div class="col-md-8">
-                    <img src="images/bwBug.png" class="inline" style="margin-right: 20px"/>
-                    <span class="typewriter">
-                        DDT Software
-                    </span>
-                </div>
-                <div class="col-md-4">
-                    <div class="row">
-                        <div class="col-md-12 typewriter text-center">
-                            <p>Drew Banin</p>
-                            <p>Drexel University</p>
-                        </div>
-                    </div>
-                
-                </div>
-            </div>
-        </div>
+    <body>
+      <div class="view-container">
+        <div ng-view class="view-frame"></div>
+      </div>
     </body>
 </html>
