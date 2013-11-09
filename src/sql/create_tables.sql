@@ -2,25 +2,25 @@ USE life;
 
 CREATE TABLE Metrics 
 (
-    ID INT NOT NULL AUTO_INCREMENT, 
-    PRIMARY KEY(ID),
-    TypeID INT,
-    EventDate DATE,
-    Value VARCHAR(140)
+    id INT NOT NULL AUTO_INCREMENT, 
+    PRIMARY KEY(id),
+    typeId INT,
+    eventDate DATE,
+    value VARCHAR(140)
 );
 
 CREATE TABLE MetricTypes
 (
-    ID INT NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY(ID),
-    Label VARCHAR(140),
-    IsNumeric BIT,
-    UnitId INT
+    id INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY(id),
+    label VARCHAR(140),
+    isNumeric INT,
+    unitId INT
 );
 
 CREATE Table MetricUnits
 (
-    ID INT NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY(ID),
-    Label VARCHAR(140)
+    id INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY(id),
+    label VARCHAR(140)
 );
