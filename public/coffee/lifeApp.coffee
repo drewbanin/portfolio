@@ -6,8 +6,7 @@ app.config ['$routeProvider', ($routeProvider) ->
   $routeProvider
     .when '/',
       templateUrl: 'partials/home.html'
-      controller: 'HomeCtrl'
+      controller: 'AppMainCtrl'
     .otherwise
       redirectTo: '/'
-      controller: 'HomeCtrl'
 ]

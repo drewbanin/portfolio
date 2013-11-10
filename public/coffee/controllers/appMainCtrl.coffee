@@ -2,8 +2,7 @@
 
 app = angular.module 'lifeApp'
 
-app.controller 'HomeCtrl', ['$scope', ($scope) ->
+app.controller 'AppMainCtrl', ['$scope', ($scope) ->
   $scope.name = 'Drew!'
-
 ]
 
