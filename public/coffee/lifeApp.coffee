@@ -1,10 +1,8 @@
 'use strict'
 
-lifeApp = angular.module 'lifeApp', [
-  'appControllers'
-]
+app = angular.module 'lifeApp', []
 
-lifeApp.config ['$routeProvider', ($routeProvider) ->
+app.config ['$routeProvider', ($routeProvider) ->
   $routeProvider
     .when '/',
       templateUrl: 'partials/home.html'

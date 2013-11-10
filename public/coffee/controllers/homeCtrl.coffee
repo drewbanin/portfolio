@@ -1,8 +1,9 @@
 'use strict'
 
-appControllers = angular.module 'appControllers', []
+app = angular.module 'lifeApp'
 
-appControllers.controller 'HomeCtrl', ['$scope', ($scope) ->
+app.controller 'HomeCtrl', ['$scope', ($scope) ->
   $scope.name = 'Drew!'
+
 ]
 

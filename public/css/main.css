@@ -4,12 +4,11 @@
     src: url('fonts/Blanch/BLANCH_CAPS.otf') format("opentype");
 }
 
-@font-face {
-    font-family: 'Typewriter';
-    src: url('fonts/atwriter.ttf');
+.blanch {
+    font-family: "Blanch";
+    font-size: 2em;
 }
 
-.typewriter {
-    font-family: "Typewriter";
-    font-size: 2em;
+.outline {
+    border: 2px solid #333
 }
