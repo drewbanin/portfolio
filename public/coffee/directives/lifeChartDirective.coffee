@@ -8,5 +8,5 @@ app.directive 'lifeChart', ->
   replace: true
   link: (scope, elem, attrs) ->
     scope.$watch attrs.data, (data, old) ->
-      if data? 
+      if data?
         elem.highcharts(data)

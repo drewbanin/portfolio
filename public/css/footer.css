@@ -1,0 +1,16 @@
+#push, #footer {
+  height: 60px;
+  margin-top: 40px;
+}
+#footer {
+  background-color: #eee;
+}
+
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

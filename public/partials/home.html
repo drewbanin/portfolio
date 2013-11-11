@@ -1,17 +1,51 @@
-<div class="container">
+<div id="wrap"> 
+  <div class="container">
     <div class="row">
-        <div class="text-center">
-            <img src="images/bwBug.png" />
-            <br />
-            <strong>Drew Banin</strong><br />
-            <strong>Drexel University</strong><br />
-            <strong>Computer Science</strong>
-        </div>
+      <div class="text-center">
+        <img src="images/bwBug.png" />
+        <br />
+        <strong>Drew Banin</strong><br />
+        <strong>Drexel University</strong><br />
+        <strong>Computer Science</strong>
+      </div>
     </div>
     <hr />
     <div class="row">
-        <div ng-controller="ChartCtrl" id="chartBox" class="col-med-8 col-med-offset-2 outline" style="height:400px">
-            <div data='lifeData' life-chart></div>
+      <div ng-controller="ChartCtrl" id="chartBox" class="col-md-12" style="height:400px">
+        <div ng-show="numMetrics > 0">
+          <div data='lifeData' life-chart></div>
         </div>
+        <div class="row">
+          <div class='col-md-10 col-md-offset-1'>
+            <div class='row'>
+              <div class='col-md-1'>
+                <strong>Plot</strong>
+              </div>
+              <div class='col-md-2' style='background-color: #DDD'>
+                Temperature
+              </div>
+              <div class='col-md-2' style='background-color: #DDD'>
+                Happiness
+              </div>
+              <div class='col-md-1'>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span ng-show='numMetrics == 0'>Something</span>
+                    <span ng-show='numMetrics > 0'>Something else</span>
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li ng-repeat="metric in availableMetrics"><a href="javascript: void(0)" ng-click='addMetric(metric)'>{{metric}}</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+  <div id="push"></div>
+</div> 
+<div id="footer">
 </div>

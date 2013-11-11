@@ -3,6 +3,10 @@
 app = angular.module 'lifeApp'
 
 app.controller 'ChartCtrl', ['$scope', ($scope) ->
+  $scope.numMetrics = 0
+  $scope.availableMetrics = ["metric1", "metric 2", "metric 3"]
+  $scope.addMetric = (metric) ->
+    console.log metric
   $scope.lifeData =
     xAxis:
       categories: ['January', 'February', 'March']
