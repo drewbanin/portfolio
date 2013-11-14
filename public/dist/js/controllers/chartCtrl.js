@@ -6,10 +6,34 @@
 
   app.controller('ChartCtrl', [
     '$scope', function($scope) {
-      $scope.numMetrics = 0;
-      $scope.availableMetrics = ["metric1", "metric 2", "metric 3"];
+      $scope.metrics = [];
+      $scope.metricList = [
+        {
+          label: "metric1",
+          selected: false
+        }, {
+          label: "metric2",
+          selected: false
+        }, {
+          label: "metric 3",
+          selected: false
+        }
+      ];
       $scope.addMetric = function(metric) {
-        return console.log(metric);
+        $scope.metrics.push(metric);
+        return metric.selected = true;
+      };
+      $scope.removeMetric = function(metric) {
+        var pos;
+        pos = $scope.metrics.indexOf(metric);
+        $scope.metrics.splice(pos, 1);
+        return metric.selected = false;
+      };
+      $scope.replaceMetric = function(oldMetric, newMetric) {
+        var pos;
+        oldMetric.selected = false;
+        pos = $scope.metrics.indexOf(oldMetric);
+        return $scope.metrics[pos] = newMetric;
       };
       return $scope.lifeData = {
         xAxis: {

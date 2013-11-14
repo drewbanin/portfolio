@@ -3,10 +3,29 @@
 app = angular.module 'lifeApp'
 
 app.controller 'ChartCtrl', ['$scope', ($scope) ->
-  $scope.numMetrics = 0
-  $scope.availableMetrics = ["metric1", "metric 2", "metric 3"]
+  $scope.metrics = []
+  $scope.metricList = [
+    label: "metric1"
+    selected: false
+  ,
+    label: "metric2"
+    selected: false
+  ,
+    label: "metric 3"
+    selected: false
+  ]
+
   $scope.addMetric = (metric) ->
-    console.log metric
+    $scope.metrics.push metric
+    metric.selected = true
+  $scope.removeMetric = (metric) ->
+    pos = $scope.metrics.indexOf metric
+    $scope.metrics.splice pos, 1
+    metric.selected = false
+  $scope.replaceMetric = (oldMetric, newMetric) ->
+    oldMetric.selected = false
+    pos = $scope.metrics.indexOf oldMetric
+    $scope.metrics[pos] = newMetric
   $scope.lifeData =
     xAxis:
       categories: ['January', 'February', 'March']
