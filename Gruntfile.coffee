@@ -6,13 +6,13 @@ module.exports = (grunt) ->
     coffee:
       compile:
         expand: true
-        cwd: 'coffee/'
+        cwd: 'public/coffee/'
         src: ['**/*.coffee']
-        dest: 'dist/js/'
+        dest: 'public/dist/js/'
         ext: '.js'
 
     watch:
-      files: ['coffee/**/*.coffee']
+      files: ['**/*.coffee']
       tasks: ['coffee']
 
   grunt.loadNpmTasks 'grunt-contrib-watch'
