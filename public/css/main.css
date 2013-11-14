@@ -16,10 +16,20 @@ html, body {
 
 .blanch {
     font-family: "Blanch";
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .outline {
     border: 2px solid #333
 }
 
+.metric-label {
+    vertical-align: middle;
+    font-size: 1.5em;
+}
+
+.metric-row {
+    background-color: #DDD;
+    border-radius: 10px;
+    padding: 20px;
+}
