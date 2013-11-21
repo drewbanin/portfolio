@@ -1,5 +1,7 @@
+CREATE DATABASE life;
 USE life;
 
+DROP TABLE IF EXISTS Metrics;
 CREATE TABLE Metrics 
 (
     id INT NOT NULL AUTO_INCREMENT, 
@@ -9,6 +11,7 @@ CREATE TABLE Metrics
     value VARCHAR(140)
 );
 
+DROP TABLE IF EXISTS MetricTypes;
 CREATE TABLE MetricTypes
 (
     id INT NOT NULL AUTO_INCREMENT,
@@ -18,6 +21,7 @@ CREATE TABLE MetricTypes
     unitId INT
 );
 
+DROP TABLE IF EXISTS MetricUnits;
 CREATE Table MetricUnits
 (
     id INT NOT NULL AUTO_INCREMENT,
