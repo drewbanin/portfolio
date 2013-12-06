@@ -14,9 +14,36 @@ html, body {
     src: url('fonts/Blanch/BLANCH_CAPS.otf') format("opentype");
 }
 
-.blanch {
-    font-family: "Blanch";
-    font-size: 1.5em;
+.custom-navbar-item {
+  position: relative;
+  height: 40px;
+  font-size: 30px;
+  line-height: 35px;
+  color: #FFF;
+  margin-right: 10px;
+  font-family: "Blanch";
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.custom-navbar-item:hover {
+  margin-top: -3px;
+  border-bottom: 3px double #FFF;
+  border-top: 3px double #FFF;
+}
+
+.big-text {
+  font-family: "Blanch";
+  font-size: 100px;
+  line-height: 100px;
+}
+
+.space-bottom {
+  margin-bottom: 20px;
+}
+
+.shadow-bottom {
+  box-shadow: 3px 3px 5px #888;
 }
 
 .outline {
