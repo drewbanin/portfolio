@@ -33,14 +33,16 @@ html, body {
 }
 
 .big-text {
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.big-text span {
   font-family: "Blanch";
   font-size: 100px;
   line-height: 100px;
 }
 
-.space-bottom {
-  margin-bottom: 20px;
-}
 
 .shadow-bottom {
   box-shadow: 3px 3px 5px #888;
