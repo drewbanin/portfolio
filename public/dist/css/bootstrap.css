@@ -5128,6 +5128,15 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background-color: #808080;
 }
 
+.label-black {
+  background-color: #333333;
+}
+
+.label-black[href]:hover,
+.label-black[href]:focus {
+  background-color: #1a1a1a;
+}
+
 .label-primary {
   background-color: #428bca;
 }

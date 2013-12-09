@@ -9,10 +9,10 @@
       $scope.metrics = [];
       $scope.metricList = [
         {
-          label: "metric1",
+          label: "metric 1",
           selected: false
         }, {
-          label: "metric2",
+          label: "metric 2",
           selected: false
         }, {
           label: "metric 3",

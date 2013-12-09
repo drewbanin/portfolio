@@ -2,9 +2,20 @@
   <div class='text-center big-text'>
     <span>about me</span>
   </div>
+  <div class='row'>
+    <div class='col-md-offset-2 col-md-8'>
+      <p class='jusitfy'>
+        While interning at <a href='http://www.rjmetrics.com/'>RJMetrics</a>, I learned about the importance
+        of data-driven descision making. I figured that if companies were successfully improving their
+        businesses by acting based on data, then I could stand to do the same with my life. Select from a
+        variety of different metrics below to see correlations between disparate aspects of my life.
+      </p>
+    </div>
+  </div>
+  <hr />
   <div ng-controller='ChartCtrl' id='chartBox' class='col-md-12' style='height:400px'>
     <div class='well'>
-      <span class='label label-default metric-label'>Plot</span>
+      <span class='metric-label-text'>Plot</span>
       <span ng-show="metrics.length" ng-repeat='selectedMetric in metrics'>
         <div class="btn-group">
           <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -18,8 +29,8 @@
             <li><a href='javascript: void(0)' ng-click='removeMetric(selectedMetric)'>Remove <b class='glyphicon glyphicon-remove'></b></a></li>
           </ul>
         </div>
-        <span class='label label-default metric-label' ng-show="$index != metrics.length - 1 && $index != metricList.length - 2">and</span>
-        <span class='label label-default metric-label' ng-show="($index == metrics.length - 1 || $index == metricList.length - 2) && $index != metricList.length - 1">against</span>
+        <span class='metric-label-text' ng-show="$index != metrics.length - 1 && $index != metricList.length - 2">and</span>
+        <span class='metric-label-text' ng-show="($index == metrics.length - 1 || $index == metricList.length - 2) && $index != metricList.length - 1">against</span>
       </span>
       <div class="btn-group" ng-show='metrics.length < metricList.length'>
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">

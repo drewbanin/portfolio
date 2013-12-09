@@ -37,3 +37,5 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'default', ['watch']
 
+  # Remember to copy fonts/ dir to dist/ dir
+
