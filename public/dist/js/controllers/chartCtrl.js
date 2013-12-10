@@ -5,20 +5,10 @@
   app = angular.module('lifeApp');
 
   app.controller('ChartCtrl', [
-    '$scope', function($scope) {
+    '$scope', 'metricService', function($scope, metricService) {
       $scope.metrics = [];
-      $scope.metricList = [
-        {
-          label: "metric 1",
-          selected: false
-        }, {
-          label: "metric 2",
-          selected: false
-        }, {
-          label: "metric 3",
-          selected: false
-        }
-      ];
+      $scope.metricList = metricService.getMetricList();
+      console.log($scope.metricList);
       $scope.addMetric = function(metric) {
         $scope.metrics.push(metric);
         return metric.selected = true;

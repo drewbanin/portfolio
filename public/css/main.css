@@ -58,3 +58,7 @@
 .justify {
   text-align: justify;
 }
+
+.indent {
+  text-indent: 10px;
+}
