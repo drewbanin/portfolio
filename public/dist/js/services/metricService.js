@@ -10,7 +10,7 @@
         getMetricList: function() {
           $http({
             method: 'GET',
-            url: 'http://localhost:8000/metrics/list'
+            url: '/metrics/list'
           }).success(function(data, status, headers, config) {
             return console.log(data);
           }).error(function(data, status, headers, config) {
