@@ -4,11 +4,18 @@ module.exports = (grunt) ->
     pkg: grunt.file.readJSON 'package.json'
 
     coffee:
-      compile:
+      public:
         expand: true
         cwd: 'public/coffee/'
         src: ['**/*.coffee']
         dest: 'public/dist/js/'
+        ext: '.js'
+
+      api:
+        expand: true
+        cwd: 'api/'
+        src: ['**/*.coffee']
+        dest: "api/"
         ext: '.js'
 
     recess: {

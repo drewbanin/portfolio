@@ -4,15 +4,15 @@ app = angular.module 'lifeApp'
 
 app.factory 'metricService', ["$http", ($http) ->
 
-  getMetricList : ->
+  getMetricList : (metricObj) ->
     $http
       method: 'GET'
-      url: '/metrics/list'
+      url: '/metric/list'
     .success( (data, status, headers, config) ->
       console.log data
+      metricObj.data = data
     ).error( (data, status, headers, config) ->
       console.log "meep, error"
     )
-    return [1, 2, 3]
 ]
 

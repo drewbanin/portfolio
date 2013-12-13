@@ -7,16 +7,16 @@
   app.factory('metricService', [
     "$http", function($http) {
       return {
-        getMetricList: function() {
-          $http({
+        getMetricList: function(metricObj) {
+          return $http({
             method: 'GET',
-            url: '/metrics/list'
+            url: '/metric/list'
           }).success(function(data, status, headers, config) {
-            return console.log(data);
+            console.log(data);
+            return metricObj.data = data;
           }).error(function(data, status, headers, config) {
             return console.log("meep, error");
           });
-          return [1, 2, 3];
         }
       };
     }

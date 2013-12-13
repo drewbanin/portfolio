@@ -7,8 +7,15 @@
   app.controller('ChartCtrl', [
     '$scope', 'metricService', function($scope, metricService) {
       $scope.metrics = [];
-      $scope.metricList = metricService.getMetricList();
-      console.log($scope.metricList);
+      $scope.metricList = [
+        {
+          label: "idk",
+          selected: false
+        }, {
+          label: "idk2",
+          selected: false
+        }
+      ];
       $scope.addMetric = function(metric) {
         $scope.metrics.push(metric);
         return metric.selected = true;

@@ -4,18 +4,14 @@ app = angular.module 'lifeApp'
 
 app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) ->
   $scope.metrics = []
-  $scope.metricList = metricService.getMetricList()
-  console.log $scope.metricList
-  #$scope.metricList = [
-  #  label: "metric 1"
-  #  selected: false
-  #,
-  #  label: "metric 2"
-  #  selected: false
-  #,
-  #  label: "metric 3"
-  #  selected: false
-  #]
+  $scope.metricList = [
+    label : "idk"
+    selected : false
+  ,
+    label : "idk2"
+    selected : false
+  ]
+  #metricService.getMetricList $scope.metricList
 
   $scope.addMetric = (metric) ->
     $scope.metrics.push metric
