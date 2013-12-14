@@ -6,56 +6,84 @@
 
   app.controller('ChartCtrl', [
     '$scope', 'metricService', function($scope, metricService) {
+      var makeCategories, makeSeries, setMetricListClosure, updateChart;
       $scope.metrics = [];
-      $scope.metricList = [
-        {
-          label: "idk",
-          selected: false
-        }, {
-          label: "idk2",
-          selected: false
-        }
-      ];
+      setMetricListClosure = function(metricListFromServer) {
+        var metric;
+        return $scope.metricList = (function() {
+          var _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = metricListFromServer.length; _i < _len; _i++) {
+            metric = metricListFromServer[_i];
+            _results.push({
+              label: metric.label,
+              unit: metric.unit,
+              id: metric.id,
+              selected: false
+            });
+          }
+          return _results;
+        })();
+      };
+      metricService.getMetricList(setMetricListClosure);
       $scope.addMetric = function(metric) {
         $scope.metrics.push(metric);
-        return metric.selected = true;
+        metric.selected = true;
+        updateChart($scope.metrics);
+        return console.log($scope.lifeData);
       };
       $scope.removeMetric = function(metric) {
         var pos;
         pos = $scope.metrics.indexOf(metric);
         $scope.metrics.splice(pos, 1);
-        return metric.selected = false;
+        metric.selected = false;
+        return updateChart($scope.metrics);
       };
       $scope.replaceMetric = function(oldMetric, newMetric) {
         var pos;
         oldMetric.selected = false;
         pos = $scope.metrics.indexOf(oldMetric);
-        return $scope.metrics[pos] = newMetric;
+        $scope.metrics[pos] = newMetric;
+        return updateChart($scope.metrics);
+      };
+      makeSeries = function(metrics) {
+        var metric, series;
+        return series = (function() {
+          var _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = metrics.length; _i < _len; _i++) {
+            metric = metrics[_i];
+            _results.push({
+              name: metric.label,
+              data: [1, 2, 3]
+            });
+          }
+          return _results;
+        })();
+      };
+      makeCategories = function(metrics) {
+        var metric, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = metrics.length; _i < _len; _i++) {
+          metric = metrics[_i];
+          _results.push(metric.label);
+        }
+        return _results;
+      };
+      updateChart = function(metrics) {
+        $scope.lifeData.series = makeSeries($scope.metrics);
+        return $scope.lifeData.xAxis.categories = makeCategories($scope.metrics);
       };
       return $scope.lifeData = {
         xAxis: {
-          categories: ['January', 'February', 'March']
+          categories: []
         },
         yAxis: {
           title: {
-            text: 'Fruit eaten'
+            text: "Drew's Life"
           }
         },
-        series: [
-          {
-            name: 'Jane',
-            data: [1, 0, 4]
-          }, {
-            name: 'John',
-            data: [5, 7, 3]
-          }, {
-            name: 'John2',
-            data: [15, 17, 13]
-          }, {
-            name: 'John3',
-            data: [25, 27, 23]
-          }
-        ]
+        series: []
       };
     }
   ]);

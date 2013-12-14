@@ -4,44 +4,55 @@ app = angular.module 'lifeApp'
 
 app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) ->
   $scope.metrics = []
-  $scope.metricList = [
-    label : "idk"
-    selected : false
-  ,
-    label : "idk2"
-    selected : false
-  ]
-  #metricService.getMetricList $scope.metricList
+
+  setMetricListClosure = (metricListFromServer) ->
+    $scope.metricList = for metric in metricListFromServer
+      label: metric.label
+      unit: metric.unit
+      id: metric.id
+      selected: false
+
+  metricService.getMetricList setMetricListClosure
 
   $scope.addMetric = (metric) ->
     $scope.metrics.push metric
     metric.selected = true
+    updateChart($scope.metrics)
+    console.log $scope.lifeData
+
   $scope.removeMetric = (metric) ->
     pos = $scope.metrics.indexOf metric
     $scope.metrics.splice pos, 1
     metric.selected = false
+    updateChart($scope.metrics)
+
   $scope.replaceMetric = (oldMetric, newMetric) ->
     oldMetric.selected = false
     pos = $scope.metrics.indexOf oldMetric
     $scope.metrics[pos] = newMetric
+    updateChart($scope.metrics)
+
+  makeSeries = (metrics) ->
+    series = for metric in metrics
+      name : metric.label
+      data: [1, 2, 3]
+
+  makeCategories = (metrics) ->
+    metric.label for metric in metrics
+
+  updateChart = (metrics) ->
+    $scope.lifeData.series = makeSeries($scope.metrics)
+    $scope.lifeData.xAxis.categories = makeCategories($scope.metrics)
+
   $scope.lifeData =
     xAxis:
-      categories: ['January', 'February', 'March']
+      categories: []
+
     yAxis:
       title:
-        text: 'Fruit eaten'
+        text: "Drew's Life"
+
     series: [
-      name: 'Jane'
-      data: [1, 0, 4]
-    ,
-      name: 'John'
-      data: [5, 7, 3]
-    ,
-      name: 'John2'
-      data: [15, 17, 13]
-    ,
-      name: 'John3'
-      data: [25, 27, 23]
     ]
 ]
 

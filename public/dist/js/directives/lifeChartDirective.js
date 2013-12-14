@@ -12,7 +12,10 @@
       link: function(scope, elem, attrs) {
         return scope.$watch(attrs.data, function(data, old) {
           if (data != null) {
+            console.log('rendering', data);
             return elem.highcharts(data);
+          } else {
+            return console.log('nope');
           }
         });
       }

@@ -21,14 +21,12 @@ unitQuery = connection.query 'SELECT id, label FROM MetricUnits', (err, rows) ->
 
   query = connection.query 'SELECT id, label, unitId FROM MetricTypes', (typeErr, typeRows) ->
     if typeErr then throw typeErr
-    for row in typeRows
-      metricList[row['id']] = {
-        'label' : row['label']
-        'unit'  : unitMap[row['unitId']]
-      }
+    metricList = for row in typeRows
+      'id'    : row['id']
+      'label' : row['label']
+      'unit'  : unitMap[row['unitId']]
 
 module.exports.metricList = (req, res) ->
-  console.log req, res
   res.send metricList
 
 #app.get '/query', (req, res) ->

@@ -7,13 +7,12 @@
   app.factory('metricService', [
     "$http", function($http) {
       return {
-        getMetricList: function(metricObj) {
+        getMetricList: function(callback) {
           return $http({
             method: 'GET',
             url: '/metric/list'
           }).success(function(data, status, headers, config) {
-            console.log(data);
-            return metricObj.data = data;
+            return callback(data);
           }).error(function(data, status, headers, config) {
             return console.log("meep, error");
           });

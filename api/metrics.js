@@ -32,24 +32,26 @@
       unitMap[row['id']] = row['label'];
     }
     return query = connection.query('SELECT id, label, unitId FROM MetricTypes', function(typeErr, typeRows) {
-      var _j, _len1, _results;
       if (typeErr) {
         throw typeErr;
       }
-      _results = [];
-      for (_j = 0, _len1 = typeRows.length; _j < _len1; _j++) {
-        row = typeRows[_j];
-        _results.push(metricList[row['id']] = {
-          'label': row['label'],
-          'unit': unitMap[row['unitId']]
-        });
-      }
-      return _results;
+      return metricList = (function() {
+        var _j, _len1, _results;
+        _results = [];
+        for (_j = 0, _len1 = typeRows.length; _j < _len1; _j++) {
+          row = typeRows[_j];
+          _results.push({
+            'id': row['id'],
+            'label': row['label'],
+            'unit': unitMap[row['unitId']]
+          });
+        }
+        return _results;
+      })();
     });
   });
 
   module.exports.metricList = function(req, res) {
-    console.log(req, res);
     return res.send(metricList);
   };
 
