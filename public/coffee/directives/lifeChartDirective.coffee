@@ -9,7 +9,4 @@ app.directive 'lifeChart', ->
   link: (scope, elem, attrs) ->
     scope.$watch attrs.data, (data, old) ->
       if data?
-        console.log 'rendering', data
         elem.highcharts(data)
-      else
-        console.log 'nope'

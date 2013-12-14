@@ -29,11 +29,13 @@ unitQuery = connection.query 'SELECT id, label FROM MetricUnits', (err, rows) ->
 module.exports.metricList = (req, res) ->
   res.send metricList
 
-#app.get '/query', (req, res) ->
-#  url_parts = url.parse req.url, true
-#  params = url_parts.query
-#  typeId = params.id
-#  console.log typeId
-#  query = connection.query 'SELECT * FROM Metrics WHERE typeId = ' + typeId, (err, result) ->
-#    if err then res.send err # But actually throw a 500 instead!
-#    res.send result
+queryForMetric = (typeId) ->
+  unitQuery = connection.query "SELECT value, eventDate FROM Metrics where typeId = #{typeId}", (err, rows) ->
+  if err then throw err
+  points = for row in rows
+    value : row['value']
+    date  : row['eventDate']
+
+module.exports.metricList = (req, res) ->
+  # get req????
+  res.send metricList

@@ -6,7 +6,7 @@
 
   app.controller('ChartCtrl', [
     '$scope', 'metricService', function($scope, metricService) {
-      var makeCategories, makeSeries, setMetricListClosure, updateChart;
+      var makeCategories, makeChartData, makeSeries, setMetricListClosure, updateChart;
       $scope.metrics = [];
       setMetricListClosure = function(metricListFromServer) {
         var metric;
@@ -29,8 +29,7 @@
       $scope.addMetric = function(metric) {
         $scope.metrics.push(metric);
         metric.selected = true;
-        updateChart($scope.metrics);
-        return console.log($scope.lifeData);
+        return updateChart($scope.metrics);
       };
       $scope.removeMetric = function(metric) {
         var pos;
@@ -71,20 +70,25 @@
         return _results;
       };
       updateChart = function(metrics) {
-        $scope.lifeData.series = makeSeries($scope.metrics);
-        return $scope.lifeData.xAxis.categories = makeCategories($scope.metrics);
+        var categories, series;
+        categories = makeCategories($scope.metrics);
+        series = makeSeries($scope.metrics);
+        return $scope.lifeData = makeChartData(categories, series);
       };
-      return $scope.lifeData = {
-        xAxis: {
-          categories: []
-        },
-        yAxis: {
-          title: {
-            text: "Drew's Life"
-          }
-        },
-        series: []
+      makeChartData = function(categories, series) {
+        return {
+          xAxis: {
+            categories: categories
+          },
+          yAxis: {
+            title: {
+              text: "Drew's Life"
+            }
+          },
+          series: series
+        };
       };
+      return $scope.lifeData = makeChartData([], []);
     }
   ]);
 

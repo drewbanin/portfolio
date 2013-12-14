@@ -18,7 +18,6 @@ app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) 
     $scope.metrics.push metric
     metric.selected = true
     updateChart($scope.metrics)
-    console.log $scope.lifeData
 
   $scope.removeMetric = (metric) ->
     pos = $scope.metrics.indexOf metric
@@ -41,18 +40,20 @@ app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) 
     metric.label for metric in metrics
 
   updateChart = (metrics) ->
-    $scope.lifeData.series = makeSeries($scope.metrics)
-    $scope.lifeData.xAxis.categories = makeCategories($scope.metrics)
+    categories = makeCategories $scope.metrics
+    series = makeSeries $scope.metrics
+    $scope.lifeData = makeChartData categories, series
 
-  $scope.lifeData =
+  makeChartData = (categories, series) ->
     xAxis:
-      categories: []
+      categories: categories
 
     yAxis:
       title:
         text: "Drew's Life"
 
-    series: [
-    ]
+    series: series
+
+  $scope.lifeData = makeChartData [], []
 ]
 

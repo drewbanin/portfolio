@@ -1,5 +1,5 @@
 (function() {
-  var connection, metricList, mysql, unitMap, unitQuery, url;
+  var connection, metricList, mysql, queryForMetric, unitMap, unitQuery, url;
 
   mysql = require('mysql');
 
@@ -50,6 +50,30 @@
       })();
     });
   });
+
+  module.exports.metricList = function(req, res) {
+    return res.send(metricList);
+  };
+
+  queryForMetric = function(typeId) {
+    var points, row;
+    unitQuery = connection.query("SELECT value, eventDate FROM Metrics where typeId = " + typeId, function(err, rows) {});
+    if (err) {
+      throw err;
+    }
+    return points = (function() {
+      var _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = rows.length; _i < _len; _i++) {
+        row = rows[_i];
+        _results.push({
+          value: row['value'],
+          date: row['eventDate']
+        });
+      }
+      return _results;
+    })();
+  };
 
   module.exports.metricList = function(req, res) {
     return res.send(metricList);
