@@ -18,15 +18,19 @@ module.exports = (grunt) ->
         dest: "api/"
         ext: '.js'
 
-    recess: {
-      options: {
-        compile: true,
-      },
-      bootstrap: {
-        src: ['public/less/bootstrap.less'],
+    recess:
+      options:
+        compile: true
+      bootstrap:
+        src: ['public/less/bootstrap.less']
         dest: 'public/dist/css/bootstrap.css'
-      }
-    }
+
+    nodemon:
+      dev:
+        options:
+          file: 'app.js'
+          env:
+            PORT: '80'
 
     watch:
       coffee:
@@ -38,11 +42,20 @@ module.exports = (grunt) ->
         tasks: ['recess']
       }
 
+    concurrent:
+      run:
+        tasks: ['watch', 'nodemon']
+        options:
+          logConcurrentOutput: true
+        
+
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-recess'
+  grunt.loadNpmTasks 'grunt-nodemon'
+  grunt.loadNpmTasks 'grunt-concurrent'
 
-  grunt.registerTask 'default', ['watch']
+  grunt.registerTask 'default', ['concurrent:run']
 
   # Remember to copy fonts/ dir to dist/ dir
 
