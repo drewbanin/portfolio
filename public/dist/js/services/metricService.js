@@ -16,6 +16,16 @@
           }).error(function(data, status, headers, config) {
             return console.log("meep, error");
           });
+        },
+        queryForMetric: function(callback, type) {
+          return $http({
+            method: 'GET',
+            url: "/metric/query?type=" + type
+          }).success(function(data, status, headers, config) {
+            return callback(data);
+          }).error(function(data, status, headers, config) {
+            return console.log("meep, error");
+          });
         }
       };
     }

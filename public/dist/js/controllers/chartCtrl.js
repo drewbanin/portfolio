@@ -46,19 +46,27 @@
         return updateChart($scope.metrics);
       };
       makeSeries = function(metrics) {
-        var metric, series;
-        return series = (function() {
-          var _i, _len, _results;
-          _results = [];
-          for (_i = 0, _len = metrics.length; _i < _len; _i++) {
-            metric = metrics[_i];
-            _results.push({
-              name: metric.label,
-              data: [1, 2, 3]
-            });
-          }
-          return _results;
-        })();
+        var addSeries, metric, series, typeId, _i, _len;
+        series = [];
+        addSeries = function(data) {
+          var point;
+          data = (function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = data.length; _i < _len; _i++) {
+              point = data[_i];
+              _results.push(point.value);
+            }
+            return _results;
+          })();
+          return series.push(data);
+        };
+        for (_i = 0, _len = metrics.length; _i < _len; _i++) {
+          metric = metrics[_i];
+          typeId = metric.id;
+          metricService.queryForMetric(addSeries, typeId);
+        }
+        return series;
       };
       makeCategories = function(metrics) {
         var metric, _i, _len, _results;
@@ -73,7 +81,8 @@
         var categories, series;
         categories = makeCategories($scope.metrics);
         series = makeSeries($scope.metrics);
-        return $scope.lifeData = makeChartData(categories, series);
+        $scope.lifeData = makeChartData(categories, series);
+        return console.log($scope.lifeData);
       };
       makeChartData = function(categories, series) {
         return {

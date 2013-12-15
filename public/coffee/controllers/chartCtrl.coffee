@@ -32,9 +32,16 @@ app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) 
     updateChart($scope.metrics)
 
   makeSeries = (metrics) ->
-    series = for metric in metrics
-      name : metric.label
-      data: [1, 2, 3]
+    series = []
+    addSeries = (data) ->
+      data = for point in data
+        point.value
+      series.push data
+
+    for metric in metrics
+      typeId = metric.id
+      metricService.queryForMetric addSeries, typeId
+    series
 
   makeCategories = (metrics) ->
     metric.label for metric in metrics
@@ -43,6 +50,7 @@ app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) 
     categories = makeCategories $scope.metrics
     series = makeSeries $scope.metrics
     $scope.lifeData = makeChartData categories, series
+    console.log $scope.lifeData
 
   makeChartData = (categories, series) ->
     xAxis:

@@ -13,5 +13,15 @@ app.factory 'metricService', ["$http", ($http) ->
     ).error( (data, status, headers, config) ->
       console.log "meep, error"
     )
+
+  queryForMetric : (callback, type) ->
+    $http
+      method: 'GET'
+      url: "/metric/query?type=#{type}"
+    .success( (data, status, headers, config) ->
+      callback data
+    ).error( (data, status, headers, config) ->
+      console.log "meep, error"
+    )
 ]
 

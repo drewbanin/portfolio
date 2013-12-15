@@ -55,28 +55,27 @@
     return res.send(metricList);
   };
 
-  queryForMetric = function(typeId) {
-    var points, row;
-    unitQuery = connection.query("SELECT value, eventDate FROM Metrics where typeId = " + typeId, function(err, rows) {});
-    if (err) {
-      throw err;
-    }
-    return points = (function() {
-      var _i, _len, _results;
-      _results = [];
-      for (_i = 0, _len = rows.length; _i < _len; _i++) {
-        row = rows[_i];
-        _results.push({
-          value: row['value'],
-          date: row['eventDate']
-        });
-      }
-      return _results;
-    })();
+  queryForMetric = function(callback, typeId) {
+    return unitQuery = connection.query("SELECT value, eventDate FROM Metrics where typeId = " + typeId, function(err, rows) {
+      var points, row;
+      points = (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = rows.length; _i < _len; _i++) {
+          row = rows[_i];
+          _results.push({
+            value: row['value'],
+            date: row['eventDate']
+          });
+        }
+        return _results;
+      })();
+      return callback.send(points);
+    });
   };
 
-  module.exports.metricList = function(req, res) {
-    return res.send(metricList);
+  module.exports.metricQuery = function(req, res) {
+    return queryForMetric(res, req.query.type);
   };
 
 }).call(this);

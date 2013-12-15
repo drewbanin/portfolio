@@ -29,13 +29,12 @@ unitQuery = connection.query 'SELECT id, label FROM MetricUnits', (err, rows) ->
 module.exports.metricList = (req, res) ->
   res.send metricList
 
-queryForMetric = (typeId) ->
+queryForMetric = (callback, typeId) ->
   unitQuery = connection.query "SELECT value, eventDate FROM Metrics where typeId = #{typeId}", (err, rows) ->
-  if err then throw err
-  points = for row in rows
-    value : row['value']
-    date  : row['eventDate']
+    points = for row in rows
+      value : row['value']
+      date  : row['eventDate']
+    callback.send points
 
-module.exports.metricList = (req, res) ->
-  # get req????
-  res.send metricList
+module.exports.metricQuery = (req, res) ->
+  queryForMetric res, req.query.type
