@@ -31,8 +31,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/metric/list', metrics.metricList);
-app.get('/metric/query', metrics.metricQuery);
+app.get('/metric/list', metrics.metricTypes);
+app.get('/metric/query', metrics.queryForMetric);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

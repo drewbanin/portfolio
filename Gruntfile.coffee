@@ -56,6 +56,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-concurrent'
 
   grunt.registerTask 'default', ['concurrent:run']
+  grunt.registerTask 'build', ['coffee:public', 'coffee:api', 'recess']
+  grunt.registerTask 'serve', ['nodemon']
 
   # Remember to copy fonts/ dir to dist/ dir
 

@@ -7,8 +7,8 @@ app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) 
 
   setMetricListClosure = (metricListFromServer) ->
     $scope.metricList = for metric in metricListFromServer
-      label: metric.label
-      unit: metric.unit
+      label: metric.metricLabel
+      unit: metric.unitLabel
       id: metric.id
       selected: false
 

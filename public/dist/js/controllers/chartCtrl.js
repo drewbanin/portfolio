@@ -16,8 +16,8 @@
           for (_i = 0, _len = metricListFromServer.length; _i < _len; _i++) {
             metric = metricListFromServer[_i];
             _results.push({
-              label: metric.label,
-              unit: metric.unit,
+              label: metric.metricLabel,
+              unit: metric.unitLabel,
               id: metric.id,
               selected: false
             });
