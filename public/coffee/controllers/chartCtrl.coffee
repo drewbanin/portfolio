@@ -36,7 +36,10 @@ app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) 
     addSeries = (data) ->
       data = for point in data
         point.value
-      series.push data
+      newSeries =
+        data: data
+        name: "test name"
+      series.push newSeries
 
     for metric in metrics
       typeId = metric.id
@@ -50,7 +53,6 @@ app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) 
     categories = makeCategories $scope.metrics
     series = makeSeries $scope.metrics
     $scope.lifeData = makeChartData categories, series
-    console.log $scope.lifeData
 
   makeChartData = (categories, series) ->
     xAxis:

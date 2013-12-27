@@ -49,7 +49,7 @@
         var addSeries, metric, series, typeId, _i, _len;
         series = [];
         addSeries = function(data) {
-          var point;
+          var newSeries, point;
           data = (function() {
             var _i, _len, _results;
             _results = [];
@@ -59,7 +59,11 @@
             }
             return _results;
           })();
-          return series.push(data);
+          newSeries = {
+            data: data,
+            name: "test name"
+          };
+          return series.push(newSeries);
         };
         for (_i = 0, _len = metrics.length; _i < _len; _i++) {
           metric = metrics[_i];
@@ -81,8 +85,7 @@
         var categories, series;
         categories = makeCategories($scope.metrics);
         series = makeSeries($scope.metrics);
-        $scope.lifeData = makeChartData(categories, series);
-        return console.log($scope.lifeData);
+        return $scope.lifeData = makeChartData(categories, series);
       };
       makeChartData = function(categories, series) {
         return {

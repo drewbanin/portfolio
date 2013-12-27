@@ -7,12 +7,22 @@
   app.directive('lifeChart', function() {
     return {
       restrict: 'A',
-      template: '<div id="mainLifeChart" style="width:100%; height:100%;"></div>',
-      replace: true,
+      template: '<div id="life-chart-container"></div>',
       link: function(scope, elem, attrs) {
         return scope.$watch(attrs.data, function(data, old) {
+          var chart;
+          console.log("Data?");
           if (data != null) {
-            return elem.highcharts(data);
+            if (data.chart == null) {
+              data.chart = {};
+            }
+            data.chart.renderTo = 'life-chart-container';
+            console.log(data);
+            console.log(JSON.stringify(data));
+            chart = new Highcharts.Chart(data);
+            return setTimeout(function() {
+              return $(window).resize();
+            }, 0);
           }
         });
       }
