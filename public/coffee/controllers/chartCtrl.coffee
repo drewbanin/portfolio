@@ -31,36 +31,40 @@ app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) 
     $scope.metrics[pos] = newMetric
     updateChart($scope.metrics)
 
-  makeSeries = (metrics) ->
-    series = []
-    addSeries = (data) ->
-      data = for point in data
-        point.value
-      newSeries =
-        data: data
-        name: "test name"
-      series.push newSeries
+  updateChart = (metrics) ->
+    categories = (metric.label for metric in metrics)
 
+    series = []
     for metric in metrics
       typeId = metric.id
-      metricService.queryForMetric addSeries, typeId
-    series
+      metricService.queryForMetric typeId, (data) ->
+        seriesData = (parseInt(point.value) for point in data)
+        newSeries =
+          data: seriesData
+          name: metric.label
+          pointInterval: 24 * 3600 * 1000
+          pointStart: Date.UTC(2013, 0, 1)
+        series.push newSeries
+        $scope.lifeData = makeChartData series
 
-  makeCategories = (metrics) ->
-    metric.label for metric in metrics
+  makeChartData = (series) ->
+    chart:
+      zoomType: 'x'
 
-  updateChart = (metrics) ->
-    categories = makeCategories $scope.metrics
-    series = makeSeries $scope.metrics
-    $scope.lifeData = makeChartData categories, series
+    legend:
+      enabled: true
 
-  makeChartData = (categories, series) ->
+    title:
+      text: 'Drew\'s Life'
+
     xAxis:
-      categories: categories
+      type: 'datetime'
+      maxZoom: 31 * 24 * 3600 * 1000
 
     yAxis:
       title:
-        text: "Drew's Life"
+        text: "y-axis title"
+      min: 0
 
     series: series
 

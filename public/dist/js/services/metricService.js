@@ -17,7 +17,7 @@
             return console.log("meep, error");
           });
         },
-        queryForMetric: function(callback, type) {
+        queryForMetric: function(type, callback) {
           return $http({
             method: 'GET',
             url: "/metric/query?type=" + type

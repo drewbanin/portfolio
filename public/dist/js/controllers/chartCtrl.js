@@ -6,7 +6,7 @@
 
   app.controller('ChartCtrl', [
     '$scope', 'metricService', function($scope, metricService) {
-      var makeCategories, makeChartData, makeSeries, setMetricListClosure, updateChart;
+      var makeChartData, setMetricListClosure, updateChart;
       $scope.metrics = [];
       setMetricListClosure = function(metricListFromServer) {
         var metric;
@@ -45,57 +45,65 @@
         $scope.metrics[pos] = newMetric;
         return updateChart($scope.metrics);
       };
-      makeSeries = function(metrics) {
-        var addSeries, metric, series, typeId, _i, _len;
+      updateChart = function(metrics) {
+        var categories, metric, series, typeId, _i, _len, _results;
+        categories = (function() {
+          var _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = metrics.length; _i < _len; _i++) {
+            metric = metrics[_i];
+            _results.push(metric.label);
+          }
+          return _results;
+        })();
         series = [];
-        addSeries = function(data) {
-          var newSeries, point;
-          data = (function() {
-            var _i, _len, _results;
-            _results = [];
-            for (_i = 0, _len = data.length; _i < _len; _i++) {
-              point = data[_i];
-              _results.push(point.value);
-            }
-            return _results;
-          })();
-          newSeries = {
-            data: data,
-            name: "test name"
-          };
-          return series.push(newSeries);
-        };
-        for (_i = 0, _len = metrics.length; _i < _len; _i++) {
-          metric = metrics[_i];
-          typeId = metric.id;
-          metricService.queryForMetric(addSeries, typeId);
-        }
-        return series;
-      };
-      makeCategories = function(metrics) {
-        var metric, _i, _len, _results;
         _results = [];
         for (_i = 0, _len = metrics.length; _i < _len; _i++) {
           metric = metrics[_i];
-          _results.push(metric.label);
+          typeId = metric.id;
+          _results.push(metricService.queryForMetric(typeId, function(data) {
+            var newSeries, point, seriesData;
+            seriesData = (function() {
+              var _j, _len1, _results1;
+              _results1 = [];
+              for (_j = 0, _len1 = data.length; _j < _len1; _j++) {
+                point = data[_j];
+                _results1.push(parseInt(point.value));
+              }
+              return _results1;
+            })();
+            newSeries = {
+              data: seriesData,
+              name: metric.label,
+              pointInterval: 24 * 3600 * 1000,
+              pointStart: Date.UTC(2013, 0, 1)
+            };
+            series.push(newSeries);
+            return $scope.lifeData = makeChartData(series);
+          }));
         }
         return _results;
       };
-      updateChart = function(metrics) {
-        var categories, series;
-        categories = makeCategories($scope.metrics);
-        series = makeSeries($scope.metrics);
-        return $scope.lifeData = makeChartData(categories, series);
-      };
-      makeChartData = function(categories, series) {
+      makeChartData = function(series) {
         return {
+          chart: {
+            zoomType: 'x'
+          },
+          legend: {
+            enabled: true
+          },
+          title: {
+            text: 'Drew\'s Life'
+          },
           xAxis: {
-            categories: categories
+            type: 'datetime',
+            maxZoom: 31 * 24 * 3600 * 1000
           },
           yAxis: {
             title: {
-              text: "Drew's Life"
-            }
+              text: "y-axis title"
+            },
+            min: 0
           },
           series: series
         };

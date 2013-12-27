@@ -8,20 +8,18 @@ app.factory 'metricService', ["$http", ($http) ->
     $http
       method: 'GET'
       url: '/metric/list'
-    .success( (data, status, headers, config) ->
+    .success (data, status, headers, config) ->
       callback(data)
-    ).error( (data, status, headers, config) ->
+    .error (data, status, headers, config) ->
       console.log "meep, error"
-    )
 
-  queryForMetric : (callback, type) ->
+  queryForMetric : (type, callback) ->
     $http
       method: 'GET'
       url: "/metric/query?type=#{type}"
-    .success( (data, status, headers, config) ->
+    .success (data, status, headers, config) ->
       callback data
-    ).error( (data, status, headers, config) ->
+    .error (data, status, headers, config) ->
       console.log "meep, error"
-    )
 ]
 
