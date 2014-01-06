@@ -6,8 +6,9 @@
 
   app.controller('ChartCtrl', [
     '$scope', 'metricService', function($scope, metricService) {
-      var makeChartData, setMetricListClosure, updateChart;
+      var makeChartData, series_colors, setMetricListClosure, updateChart;
       $scope.metrics = [];
+      series_colors = ["#00A0B0", "#CC333F", "#6A4A3C", "#EDC951"];
       setMetricListClosure = function(metricListFromServer) {
         var metric;
         return $scope.metricList = (function() {
@@ -46,41 +47,36 @@
         return updateChart($scope.metrics);
       };
       updateChart = function(metrics) {
-        var categories, metric, series, typeId, _i, _len, _results;
-        categories = (function() {
-          var _i, _len, _results;
-          _results = [];
-          for (_i = 0, _len = metrics.length; _i < _len; _i++) {
-            metric = metrics[_i];
-            _results.push(metric.label);
-          }
-          return _results;
-        })();
+        var index, makeSeriesFunc, metric, series, typeId, _i, _len, _results;
         series = [];
-        _results = [];
-        for (_i = 0, _len = metrics.length; _i < _len; _i++) {
-          metric = metrics[_i];
-          typeId = metric.id;
-          _results.push(metricService.queryForMetric(typeId, function(data) {
+        makeSeriesFunc = function(index, label) {
+          return function(data) {
             var newSeries, point, seriesData;
             seriesData = (function() {
-              var _j, _len1, _results1;
-              _results1 = [];
-              for (_j = 0, _len1 = data.length; _j < _len1; _j++) {
-                point = data[_j];
-                _results1.push(parseInt(point.value));
+              var _i, _len, _results;
+              _results = [];
+              for (_i = 0, _len = data.length; _i < _len; _i++) {
+                point = data[_i];
+                _results.push(parseInt(point.value));
               }
-              return _results1;
+              return _results;
             })();
             newSeries = {
+              color: series_colors[index],
               data: seriesData,
-              name: metric.label,
+              name: label,
               pointInterval: 24 * 3600 * 1000,
               pointStart: Date.UTC(2013, 0, 1)
             };
             series.push(newSeries);
             return $scope.lifeData = makeChartData(series);
-          }));
+          };
+        };
+        _results = [];
+        for (index = _i = 0, _len = metrics.length; _i < _len; index = ++_i) {
+          metric = metrics[index];
+          typeId = metric.id;
+          _results.push(metricService.queryForMetric(typeId, makeSeriesFunc(index, metric.label)));
         }
         return _results;
       };

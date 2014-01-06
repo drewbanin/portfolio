@@ -5,6 +5,8 @@ app = angular.module 'lifeApp'
 app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) ->
   $scope.metrics = []
 
+  series_colors = ["#00A0B0", "#CC333F", "#6A4A3C", "#EDC951"]
+
   setMetricListClosure = (metricListFromServer) ->
     $scope.metricList = for metric in metricListFromServer
       label: metric.metricLabel
@@ -33,17 +35,21 @@ app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) 
 
   updateChart = (metrics) ->
     series = []
-    for metric in metrics
-      typeId = metric.id
-      metricService.queryForMetric typeId, (data) ->
+    makeSeriesFunc = (index, label) ->
+      return (data) ->
         seriesData = (parseInt(point.value) for point in data)
         newSeries =
+          color : series_colors[index]
           data: seriesData
-          name: metric.label
+          name: label
           pointInterval: 24 * 3600 * 1000
           pointStart: Date.UTC(2013, 0, 1)
         series.push newSeries
         $scope.lifeData = makeChartData series
+
+    for metric, index in metrics
+      typeId = metric.id
+      metricService.queryForMetric typeId, makeSeriesFunc(index, metric.label)
 
   makeChartData = (series) ->
     chart:
