@@ -46,16 +46,7 @@
         return updateChart($scope.metrics);
       };
       updateChart = function(metrics) {
-        var categories, metric, series, typeId, _i, _len, _results;
-        categories = (function() {
-          var _i, _len, _results;
-          _results = [];
-          for (_i = 0, _len = metrics.length; _i < _len; _i++) {
-            metric = metrics[_i];
-            _results.push(metric.label);
-          }
-          return _results;
-        })();
+        var metric, series, typeId, _i, _len, _results;
         series = [];
         _results = [];
         for (_i = 0, _len = metrics.length; _i < _len; _i++) {
