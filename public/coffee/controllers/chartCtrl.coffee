@@ -32,8 +32,6 @@ app.controller 'ChartCtrl', ['$scope', 'metricService', ($scope, metricService) 
     updateChart($scope.metrics)
 
   updateChart = (metrics) ->
-    categories = (metric.label for metric in metrics)
-
     series = []
     for metric in metrics
       typeId = metric.id
