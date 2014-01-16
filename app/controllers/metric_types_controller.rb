@@ -1,0 +1,2 @@
+class MetricTypesController < ApplicationController
+end
