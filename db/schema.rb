@@ -28,6 +28,6 @@ ActiveRecord::Schema.define(version: 20140116052025) do
     t.datetime "updated_at"
   end
 
-  add_index "metrics", ["metric_type_id"], name: "index_metrics_on_metric_type_id"
+  add_index "metrics", ["metric_type_id"], name: "index_metrics_on_metric_type_id", using: :btree
 
 end
