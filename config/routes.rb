@@ -1,6 +1,8 @@
 DrewbaninCom::Application.routes.draw do
 
-  resources :metric_types
+  scope "/api" do
+    resources :metric_types, :defaults => { :format => 'json' }
+  end
 
   #root to: "welcome#index"
 end
